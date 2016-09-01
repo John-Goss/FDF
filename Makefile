@@ -1,10 +1,12 @@
-SRC_NAME =	main.c \
+SRC_NAME =	main.c
 
 NAME = fdf
 
-FLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit
+FLAGS = -Wall -Wextra -Werror
 
-LIB = ./Libft/libft.a
+Flagframe = -lmlx -framework OpenGL -framework AppKit
+
+LIB = ./Libft/libft.a ./minilibx_macos/libmlx.a
 
 OBJET = $(SRC_NAME:.c=.o)
 
@@ -13,7 +15,7 @@ all: $(NAME)
 	@echo "Make Done."
 
 $(NAME): $(LIB) $(OBJET)
-	@gcc $(FLAGS) $(OBJET) -L./Libft/ -lft -o $(NAME)
+	@gcc $(FLAGS) $(OBJET) -L./Libft/ $(Flagframe) -lft -o $(NAME)
 
 $(LIB):
 	make -C ./Libft/
