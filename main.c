@@ -6,40 +6,52 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/31 11:58:30 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/01 16:13:46 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/05 16:17:36 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	key_fcnt(int keycode, t_mlx *param)
+static void		ft_new_image(t_mlx *mlx)
 {
-	(void)param;
-	if (keycode == 53)
-		exit(0);
-	return (0);
+	t_img	*img;
+	void	*data;
+
+	if (!(img = (t_img *)malloc(sizeof(t_img))))
+		return ;
+	img->endian = 0;
+	img->width = mlx->width;
+	img->p_img = mlx_new_image(mlx->screen, mlx->width, mlx->height);
+	if (!img->p_img)
+		return ;
+	data = mlx_get_data_addr(img->p_img, &img->bpp, &img->width, &img->endian);
+	img->octet = img->bpp / 8;
+	img->data = data;
+	mlx->mlx_img = img;
+	mlx->mlx_img->max_size = img->octet * mlx->width * mlx->height;
 }
 
-int	mouse_fcnt(int button, int x, int y, t_mlx *param)
+static t_mlx	*fdf_mlx_init(int width, int height, char *name)
 {
-	if (button == 1)
-		mlx_pixel_put(param->screen, param->window, x, y, 0xFFFFFF);
-	return (0);
+	t_mlx	*mlx;
+
+	if (!(mlx = (t_mlx *)malloc(sizeof(t_mlx))))
+		return (NULL);
+	mlx->width = width;
+	mlx->height = height;
+	mlx->screen = mlx_init();
+	mlx->window = mlx_new_window(mlx->screen, mlx->width, mlx->height, name);
+	ft_new_image(mlx);
+	return (mlx);
 }
 
-int	main(void)
+int				main(void)
 {
-	t_mlx	*ptr;
+	t_mlx		*mlx;
 
-	if (!(ptr = (t_mlx*)malloc(sizeof(t_mlx))))
-		return (1);
-	ptr->x_max = 1024;
-	ptr->y_max = 768;
-	ptr->nm_window = "FDF";
-	ptr->screen = mlx_init();
-	ptr->window = mlx_new_window(ptr->screen, ptr->x_max, ptr->y_max, ptr->nm_window);
-	mlx_hook(ptr->window, 4, (1L<<2), mouse_fcnt, ptr);
-	mlx_hook(ptr->window, 2, (1<<8), key_fcnt, ptr);
-	mlx_loop(ptr->screen);
+	mlx = NULL;
+	mlx = fdf_mlx_init(w_width, w_height, "FDF");
+	fdf_hook(mlx);
+	mlx_loop(mlx->screen);
 	return (0);
 }
