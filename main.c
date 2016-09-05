@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/31 11:58:30 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/05 16:17:36 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/05 18:21:14 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,19 @@ static t_mlx	*fdf_mlx_init(int width, int height, char *name)
 	return (mlx);
 }
 
-int				main(void)
+int				main(int ac, char **av)
 {
-	t_mlx		*mlx;
+	t_mlx	*mlx;
+	int		fd;
 
 	mlx = NULL;
-	mlx = fdf_mlx_init(w_width, w_height, "FDF");
-	fdf_hook(mlx);
-	mlx_loop(mlx->screen);
+	if (ac == 2)
+	{
+		if ((fd = open(av[1], O_RDONLY)) == -1)
+			return (0);
+		mlx = fdf_mlx_init(w_width, w_height, "FDF");
+		fdf_hook(mlx);
+		mlx_loop(mlx->screen);
+	}
 	return (0);
 }
