@@ -4,6 +4,7 @@
 # include "libft.h"
 # include "mlx.h"
 # include "X.h"
+# include <fcntl.h>
 # include <math.h>
 
 #define w_width 1024
