@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/07 12:18:26 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/07 12:43:56 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/07 16:07:29 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,8 @@ void	set_map(t_mlx *mlx)
 
 	width = (w_width + 100) / 2;
 	height = (w_height + 100) / 2;
+	mlx->center.x == 0 ? mlx->center.x = 10 : mlx->center.x;
+	s = (width - 600) / (mlx->center.x);
+	calcul_translation(mlx, -mlx->center.x + w, -mlx->center.y + h, 0);
+	calcul_scale(mlx, s);
 }

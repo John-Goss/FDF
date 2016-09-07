@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/07 11:34:27 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/07 12:36:34 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/07 16:26:49 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,26 @@ typedef struct		s_map
 	int				len;
 }					t_map;
 
+typedef struct		s_matrice
+{
+					double a1;
+					double a2;
+					double a3;
+					double a4;
+					double b1;
+					double b2;
+					double b3;
+					double b4;
+					double c1;
+					double c2;
+					double c3;
+					double c4;
+					double d1;
+					double d2;
+					double d3;
+					double d4;
+}					t_matrice;
+
 typedef struct		s_img
 {
 	char			*data;
@@ -76,9 +96,17 @@ typedef struct		s_mlx
 	t_img			*mlx_img;
 }					t_mlx;
 
-void	ft_error(int nm_error);
-void	fdf_hook(t_mlx *mlx);
-void	set_center(t_mlx *mlx);
-t_map	*parse_map(char **av, int fd);
+void		ft_error(int nm_error);
+void		fdf_hook(t_mlx *mlx);
+void		set_center(t_mlx *mlx);
+void		calcul_scale(t_mlx *mlx, double s);
+void		calcul_translation(t_mlx *mlx, double x, double y, double z);
+void		calcul_rotation(t_mlx *mlx, double rot, char axe);
+t_matrice	*ft_matrice_scale(double s);
+t_matrice	*ft_matrice_translation(double tx, double ty, double tz);
+t_matrice	*ft_matrice_rotation_z(double beta);
+t_matrice	*ft_matrice_rotation_y(double beta);
+t_matrice	*ft_matrice_rotation_x(double beta);
+t_map		*parse_map(char **av, int fd);
 
 #endif
