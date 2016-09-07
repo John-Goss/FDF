@@ -7,8 +7,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include "get_next_line.h"
 
-# include "libft/includes/libft.h"
+# include "libft.h"
 
 # define DEC_T 100
 # define DEC_L 100

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/31 11:58:30 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/05 18:21:14 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/07 12:43:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,23 @@ static t_mlx	*fdf_mlx_init(int width, int height, char *name)
 
 int				main(int ac, char **av)
 {
+	t_map	*map;
 	t_mlx	*mlx;
-	int		fd;
 
 	mlx = NULL;
 	if (ac == 2)
 	{
-		if ((fd = open(av[1], O_RDONLY)) == -1)
-			return (0);
+		map = parse_map(av, 0);
+		if (map->len == 0 || map->lines[0]->len == 0)
+			ft_error(2);
 		mlx = fdf_mlx_init(w_width, w_height, "FDF");
+		mlx->map = map;
+		set_center(mlx);
+		set_map(mlx);
 		fdf_hook(mlx);
 		mlx_loop(mlx->screen);
 	}
+	else
+		ft_error(1);
 	return (0);
 }

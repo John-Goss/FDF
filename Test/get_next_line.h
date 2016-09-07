@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/31 12:37:04 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/07 12:14:53 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/01/07 18:24:44 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/03/14 14:40:42 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 32
 
-void	ft_error(int nm_error)
+# include "libft.h"
+# include <sys/types.h>
+# include <sys/uio.h>
+
+typedef struct		s_struct
 {
-	if (nm_error == 3)
-		ft_printf("Error code: %d - Error when open map.\n", nm_error);
-	else if (nm_error == 1)
-		ft_printf("Error code: %d - Arguments, enter just one map.\n", nm_error);
-	else if (nm_error == 2)
-		ft_printf("Error code: %d - Invalid map.\n", nm_error);
-	exit (1);
-}
+	int				fd;
+	char			buf[BUFF_SIZE + 1];
+	char			*save_buf;
+	struct s_struct	*next;
+}					t_struct;
+
+int					get_next_line(int const fd, char **line);
+
+#endif

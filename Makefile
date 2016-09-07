@@ -1,5 +1,8 @@
 SRC_NAME =	main.c \
-			hook.c
+			error.c \
+			hook.c \
+			set_display.c \
+			parse_map.c
 
 NAME = fdf
 
