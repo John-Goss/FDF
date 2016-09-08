@@ -99,6 +99,7 @@ typedef struct		s_mlx
 void		ft_error(int nm_error);
 void		fdf_hook(t_mlx *mlx);
 void		set_center(t_mlx *mlx);
+void		set_map(t_mlx *mlx);
 void		calcul_scale(t_mlx *mlx, double s);
 void		calcul_translation(t_mlx *mlx, double x, double y, double z);
 void		calcul_rotation(t_mlx *mlx, double rot, char axe);

@@ -41,7 +41,7 @@ static void	calcul_matrice_points(t_matrice *m, t_mlx *mlx)
 		x = 0;
 		while (x < (mlx->map->lines[y]->len))
 		{
-			ft_cal_matrice(mlx->map->lines[y]->points[x], m, mlx);
+			calcul_matrice(mlx->map->lines[y]->points[x], m, mlx);
 			x++;
 		}
 		y++;
@@ -58,7 +58,7 @@ void		calcul_rotation(t_mlx *mlx, double rot, char axe)
 		m_rotation = ft_matrice_rotation_y(rot);
 	else
 		m_rotation = ft_matrice_rotation_z(rot);
-	calcul_matrice_points(m_rotation, e);
+	calcul_matrice_points(m_rotation, mlx);
 	free(m_rotation);
 }
 

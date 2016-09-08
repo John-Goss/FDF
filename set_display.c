@@ -38,6 +38,6 @@ void	set_map(t_mlx *mlx)
 	height = (w_height + 100) / 2;
 	mlx->center.x == 0 ? mlx->center.x = 10 : mlx->center.x;
 	s = (width - 600) / (mlx->center.x);
-	calcul_translation(mlx, -mlx->center.x + w, -mlx->center.y + h, 0);
+	calcul_translation(mlx, -mlx->center.x + width, -mlx->center.y + height, 0);
 	calcul_scale(mlx, s);
 }

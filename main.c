@@ -60,6 +60,7 @@ int				main(int ac, char **av)
 		mlx->map = map;
 		set_center(mlx);
 		set_map(mlx);
+		mlx_expose_hook(mlx->window, set_hook, mlx);
 		fdf_hook(mlx);
 		mlx_loop(mlx->screen);
 	}

@@ -39,6 +39,12 @@ static int	mouse_fcnt_release(int button, int x, int y, t_mlx *param)
 	return (0);
 }
 
+int		set_hook(t_mlx *mlx)
+{
+	draw_reload(mlx);
+	return (0);
+}
+
 void	fdf_hook(t_mlx *mlx)
 {
 	mlx_hook(mlx->window, KeyPress, Button1Mask, key_fcnt, mlx);
